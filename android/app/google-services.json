@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "129369021565",
+    "project_id": "hct-carpooling-385dc",
+    "storage_bucket": "hct-carpooling-385dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129369021565:android:35496de1c9b3d7efff6514",
+        "android_client_info": {
+          "package_name": "com.mealplanner.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDpA4G7sv3ML4eGmAidkAAbhX8T-odv7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
