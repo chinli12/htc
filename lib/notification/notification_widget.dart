@@ -212,7 +212,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       if ((listViewNotificationRecord.type ==
-                                              Notifytype.Requestdrive) &&
+                                              Notifytype.Requestdrive) ||
                                           (listViewNotificationRecord.type ==
                                               Notifytype.acepted))
                                         Material(

@@ -70,9 +70,25 @@ class _Driver0nboardingWidgetState extends State<Driver0nboardingWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primarydark,
           automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              logFirebaseEvent('DRIVER0NBOARDING_arrow_back_rounded_ICN_');
+              logFirebaseEvent('IconButton_navigate_back');
+              context.pop();
+            },
+          ),
           actions: [],
           centerTitle: false,
-          elevation: 0.0,
+          elevation: 2.0,
         ),
         body: SafeArea(
           top: true,

@@ -64,7 +64,7 @@ class _GMapWidget2State extends State<GMapWidget2> {
             children: [
               Expanded(
                 child: GM.GoogleMapsWidget(
-                  apiKey: "YOUR GOOGLE MAPS API KEY HERE",
+                  apiKey: "AIzaSyDDpA4G7sv3ML4eGmAidkAAbhX8T-odv7w",
                   key: _mapsWidgetController,
                   sourceLatLng: GM.LatLng(
                     widget.ordersDoc.source!.latitude,
