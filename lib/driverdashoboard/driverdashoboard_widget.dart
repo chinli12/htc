@@ -594,7 +594,8 @@ class _DriverdashoboardWidgetState extends State<DriverdashoboardWidget> {
                                                   )
                                                   .where(
                                                     'status',
-                                                    isEqualTo: Status.pending
+                                                    isNotEqualTo: Status
+                                                        .completed
                                                         .serialize(),
                                                   ),
                                         ),
