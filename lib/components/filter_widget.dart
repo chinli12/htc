@@ -49,7 +49,7 @@ class _FilterWidgetState extends State<FilterWidget> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
+          color: FlutterFlowTheme.of(context).secondarydark,
           boxShadow: [
             BoxShadow(
               blurRadius: 4.0,
@@ -72,7 +72,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 'Location Filter',
                 style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily: 'Inter',
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: FlutterFlowTheme.of(context).primaryBackground,
                       letterSpacing: 0.0,
                     ),
               ),
@@ -133,6 +133,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   .bodyLarge
                                   .override(
                                     fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -168,6 +170,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   .bodyLarge
                                   .override(
                                     fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -203,6 +207,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   .bodyLarge
                                   .override(
                                     fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -220,12 +226,32 @@ class _FilterWidgetState extends State<FilterWidget> {
               FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('FILTER_COMP_APPLY_FILTER_BTN_ON_TAP');
-                  logFirebaseEvent('Button_update_app_state');
-                  FFAppState().location = _model.placePickerValue.latLng;
-                  FFAppState().locationfilter = false;
-                  safeSetState(() {});
-                  logFirebaseEvent('Button_bottom_sheet');
-                  Navigator.pop(context);
+                  if (_model.placePickerValue.latLng != null) {
+                    logFirebaseEvent('Button_update_app_state');
+                    FFAppState().location = _model.placePickerValue.latLng;
+                    FFAppState().locationfilter = true;
+                    _model.updatePage(() {});
+                    logFirebaseEvent('Button_bottom_sheet');
+                    Navigator.pop(context);
+                  } else {
+                    logFirebaseEvent('Button_alert_dialog');
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Location required'),
+                          content: Text('please select a location'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 },
                 text: 'Apply Filter',
                 options: FFButtonOptions(
