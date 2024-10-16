@@ -1186,6 +1186,7 @@ class _Driver0nboardingWidgetState extends State<Driver0nboardingWidget> {
                           available: true,
                           gender:
                               valueOrDefault(currentUserDocument?.gender, ''),
+                          active: false,
                         ));
                         _model.driver = DriverRecord.getDocumentFromData(
                             createDriverRecordData(
@@ -1220,6 +1221,7 @@ class _Driver0nboardingWidgetState extends State<Driver0nboardingWidget> {
                               available: true,
                               gender: valueOrDefault(
                                   currentUserDocument?.gender, ''),
+                              active: false,
                             ),
                             driverRecordReference);
                         logFirebaseEvent('Button_backend_call');

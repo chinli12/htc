@@ -77,6 +77,11 @@ class UsersRecord extends FirestoreRecord {
   bool get completed => _completed ?? false;
   bool hasCompleted() => _completed != null;
 
+  // "admin" field.
+  bool? _admin;
+  bool get admin => _admin ?? false;
+  bool hasAdmin() => _admin != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -90,6 +95,7 @@ class UsersRecord extends FirestoreRecord {
     _driver = snapshotData['driver'] as DocumentReference?;
     _gender = snapshotData['Gender'] as String?;
     _completed = snapshotData['completed'] as bool?;
+    _admin = snapshotData['admin'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -136,6 +142,7 @@ Map<String, dynamic> createUsersRecordData({
   DocumentReference? driver,
   String? gender,
   bool? completed,
+  bool? admin,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -149,6 +156,7 @@ Map<String, dynamic> createUsersRecordData({
       'driver': driver,
       'Gender': gender,
       'completed': completed,
+      'admin': admin,
     }.withoutNulls,
   );
 
@@ -172,7 +180,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.ingredientDislikes, e2?.ingredientDislikes) &&
         e1?.driver == e2?.driver &&
         e1?.gender == e2?.gender &&
-        e1?.completed == e2?.completed;
+        e1?.completed == e2?.completed &&
+        e1?.admin == e2?.admin;
   }
 
   @override
@@ -188,7 +197,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.ingredientDislikes,
         e?.driver,
         e?.gender,
-        e?.completed
+        e?.completed,
+        e?.admin
       ]);
 
   @override

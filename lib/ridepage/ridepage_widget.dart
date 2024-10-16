@@ -555,6 +555,10 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                                     .where(
                                       'gender',
                                       isEqualTo: 'Male',
+                                    )
+                                    .where(
+                                      'active',
+                                      isEqualTo: true,
                                     ),
                               ),
                               builder: (context, snapshot) {
@@ -857,6 +861,10 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                                       'location',
                                       isEqualTo:
                                           FFAppState().location?.toGeoPoint(),
+                                    )
+                                    .where(
+                                      'active',
+                                      isEqualTo: true,
                                     ),
                               ),
                               builder: (context, snapshot) {
@@ -1154,6 +1162,10 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                                     .where(
                                       'gender',
                                       isEqualTo: 'Female',
+                                    )
+                                    .where(
+                                      'active',
+                                      isEqualTo: true,
                                     ),
                               ),
                               builder: (context, snapshot) {
