@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:129369021565:android:a824d4cce143f067ff6514",
+        "android_client_info": {
+          "package_name": "com.CapstoneProject.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDpA4G7sv3ML4eGmAidkAAbhX8T-odv7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:129369021565:android:35496de1c9b3d7efff6514",
         "android_client_info": {
           "package_name": "com.mealplanner.app"

@@ -89,4 +89,16 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInUserIngredientDislikes(int index, String value) {
     userIngredientDislikes.insert(index, value);
   }
+
+  LatLng? _location;
+  LatLng? get location => _location;
+  set location(LatLng? value) {
+    _location = value;
+  }
+
+  bool _locationfilter = false;
+  bool get locationfilter => _locationfilter;
+  set locationfilter(bool value) {
+    _locationfilter = value;
+  }
 }

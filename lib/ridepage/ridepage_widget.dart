@@ -1,13 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
+import '/components/filter_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -38,8 +36,6 @@ class _RidepageWidgetState extends State<RidepageWidget> {
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Ridepage'});
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => safeSetState(() => currentUserLocationValue = loc));
-    _model.textController ??= TextEditingController();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -52,6 +48,7 @@ class _RidepageWidgetState extends State<RidepageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -124,272 +121,60 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 8.0, 8.0, 8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(
-                                  Icons.search,
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 24.0,
-                                ),
-                                Expanded(
-                                  child: FutureBuilder<ApiCallResponse>(
-                                    future: GetadressCall.call(
-                                      input: _model.textController.text,
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                      final textFieldGetadressResponse =
-                                          snapshot.data!;
-
-                                      return Container(
-                                        width: 200.0,
-                                        child: Autocomplete<String>(
-                                          initialValue: TextEditingValue(),
-                                          optionsBuilder: (textEditingValue) {
-                                            if (textEditingValue.text == '') {
-                                              return const Iterable<
-                                                  String>.empty();
-                                            }
-                                            return GetadressCall.description(
-                                              textFieldGetadressResponse
-                                                  .jsonBody,
-                                            )!
-                                                .where((option) {
-                                              final lowercaseOption =
-                                                  option.toLowerCase();
-                                              return lowercaseOption.contains(
-                                                  textEditingValue.text
-                                                      .toLowerCase());
-                                            });
-                                          },
-                                          optionsViewBuilder:
-                                              (context, onSelected, options) {
-                                            return AutocompleteOptionsList(
-                                              textFieldKey: _model.textFieldKey,
-                                              textController:
-                                                  _model.textController!,
-                                              options: options.toList(),
-                                              onSelected: onSelected,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              textHighlightStyle: TextStyle(),
-                                              elevation: 4.0,
-                                              optionBackgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              optionHighlightColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              maxHeight: 200.0,
-                                            );
-                                          },
-                                          onSelected: (String selection) {
-                                            safeSetState(() =>
-                                                _model.textFieldSelectedOption =
-                                                    selection);
-                                            FocusScope.of(context).unfocus();
-                                          },
-                                          fieldViewBuilder: (
-                                            context,
-                                            textEditingController,
-                                            focusNode,
-                                            onEditingComplete,
-                                          ) {
-                                            _model.textFieldFocusNode =
-                                                focusNode;
-
-                                            _model.textController =
-                                                textEditingController;
-                                            return TextFormField(
-                                              key: _model.textFieldKey,
-                                              controller: textEditingController,
-                                              focusNode: focusNode,
-                                              onEditingComplete:
-                                                  onEditingComplete,
-                                              onChanged: (_) =>
-                                                  EasyDebounce.debounce(
-                                                '_model.textController',
-                                                Duration(milliseconds: 5000),
-                                                () async {
-                                                  logFirebaseEvent(
-                                                      'RIDETextField_v3n2nf2x_ON_TEXTFIELD_CHAN');
-                                                  logFirebaseEvent(
-                                                      'TextField_update_page_state');
-                                                  _model.adrees =
-                                                      GetadressCall.description(
-                                                    textFieldGetadressResponse
-                                                        .jsonBody,
-                                                  )!
-                                                          .toList()
-                                                          .cast<String>();
-                                                  safeSetState(() {});
-                                                  logFirebaseEvent(
-                                                      'TextField_update_page_state');
-                                                  _model.placeid =
-                                                      GetadressCall.placeid(
-                                                    textFieldGetadressResponse
-                                                        .jsonBody,
-                                                  )!
-                                                          .toList()
-                                                          .cast<String>();
-                                                  safeSetState(() {});
-                                                  logFirebaseEvent(
-                                                      'TextField_backend_call');
-                                                  _model.apiResultrze =
-                                                      await GetdetailsCall.call(
-                                                    input: _model.placeid[_model
-                                                        .adrees
-                                                        .toList()
-                                                        .indexOf((_model
-                                                            .textFieldSelectedOption!))],
-                                                  );
-
-                                                  if ((_model.apiResultrze
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    logFirebaseEvent(
-                                                        'TextField_update_page_state');
-                                                    _model.latlong =
-                                                        functions.makelatlong(
-                                                            GetdetailsCall.lat(
-                                                              (_model.apiResultrze
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                            )!,
-                                                            GetdetailsCall.log(
-                                                              (_model.apiResultrze
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                            )!);
-                                                    safeSetState(() {});
-                                                  }
-
-                                                  safeSetState(() {});
-                                                },
-                                              ),
-                                              autofocus: false,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                labelStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                hintText: 'search Location',
-                                                hintStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondarydark,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                filled: true,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondarydark,
-                                              ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                              cursorColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              validator: _model
-                                                  .textControllerValidator
-                                                  .asValidator(context),
-                                            );
-                                          },
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'RIDEPAGE_PAGE_Row_q5jdy3c6_ON_TAP');
+                                logFirebaseEvent('Row_bottom_sheet');
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) {
+                                    return GestureDetector(
+                                      onTap: () =>
+                                          FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: Container(
+                                          height: 400.0,
+                                          child: FilterWidget(),
                                         ),
-                                      );
-                                    },
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Icon(
+                                    Icons.search,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 24.0,
                                   ),
-                                ),
-                              ].divide(SizedBox(width: 12.0)),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 10.0, 0.0, 10.0),
+                                    child: Text(
+                                      'Search  by Location',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ].divide(SizedBox(width: 12.0)),
+                              ),
                             ),
                           ),
                         ),
@@ -399,7 +184,6 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                 ),
                 Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: 852.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primarydark,
                     borderRadius: BorderRadius.only(
@@ -428,8 +212,7 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                         ),
                         if ((valueOrDefault(currentUserDocument?.gender, '') ==
                                 'Male') &&
-                            (_model.textFieldSelectedOption != null &&
-                                _model.textFieldSelectedOption != ''))
+                            (FFAppState().locationfilter == true))
                           AuthUserStreamWidget(
                             builder: (context) =>
                                 StreamBuilder<List<DriverRecord>>(
@@ -445,7 +228,8 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                                     )
                                     .where(
                                       'location',
-                                      isEqualTo: _model.latlong?.toGeoPoint(),
+                                      isEqualTo:
+                                          FFAppState().location?.toGeoPoint(),
                                     ),
                               ),
                               builder: (context, snapshot) {
@@ -730,8 +514,7 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                           ),
                         if ((valueOrDefault(currentUserDocument?.gender, '') ==
                                 'Male') &&
-                            (_model.textFieldSelectedOption == null ||
-                                _model.textFieldSelectedOption == ''))
+                            (FFAppState().locationfilter != true))
                           AuthUserStreamWidget(
                             builder: (context) =>
                                 StreamBuilder<List<DriverRecord>>(
@@ -1028,8 +811,7 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                           ),
                         if ((valueOrDefault(currentUserDocument?.gender, '') ==
                                 'Female') &&
-                            (_model.textController.text != null &&
-                                _model.textController.text != ''))
+                            (FFAppState().locationfilter == true))
                           AuthUserStreamWidget(
                             builder: (context) =>
                                 StreamBuilder<List<DriverRecord>>(
@@ -1045,7 +827,8 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                                     )
                                     .where(
                                       'location',
-                                      isEqualTo: _model.latlong?.toGeoPoint(),
+                                      isEqualTo:
+                                          FFAppState().location?.toGeoPoint(),
                                     ),
                               ),
                               builder: (context, snapshot) {
@@ -1330,8 +1113,7 @@ class _RidepageWidgetState extends State<RidepageWidget> {
                           ),
                         if ((valueOrDefault(currentUserDocument?.gender, '') ==
                                 'Female') &&
-                            (_model.textController.text == null ||
-                                _model.textController.text == ''))
+                            (FFAppState().locationfilter != true))
                           AuthUserStreamWidget(
                             builder: (context) =>
                                 StreamBuilder<List<DriverRecord>>(

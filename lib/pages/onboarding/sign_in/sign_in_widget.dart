@@ -349,12 +349,11 @@ class _SignInWidgetState extends State<SignInWidget> {
                                 currentUserDocument?.completed, false)) {
                               logFirebaseEvent('Button_navigate_to');
 
-                              context.pushNamedAuth(
-                                  'mainpage', context.mounted);
+                              context.goNamedAuth('mainpage', context.mounted);
                             } else {
                               logFirebaseEvent('Button_navigate_to');
 
-                              context.pushNamedAuth('setting', context.mounted);
+                              context.goNamedAuth('setting', context.mounted);
                             }
                           },
                           text: 'Sign In',

@@ -717,8 +717,11 @@ class _RatingpageWidgetState extends State<RatingpageWidget> {
                                   color: Colors.white,
                                   size: 24.0,
                                 ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'RATINGPAGE_PAGE_arrow_back_ICN_ON_TAP');
+                                  logFirebaseEvent('IconButton_navigate_back');
+                                  context.safePop();
                                 },
                               ),
                               Text(
