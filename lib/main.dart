@@ -168,7 +168,7 @@ class _NavBarPageState extends State<NavBarPage> {
         }),
         backgroundColor: Color(0xFF191822),
         selectedItemColor: FlutterFlowTheme.of(context).primary,
-        unselectedItemColor: FlutterFlowTheme.of(context).secondaryText,
+        unselectedItemColor: FlutterFlowTheme.of(context).primaryBackground,
         selectedBackgroundColor: Color(0x00000000),
         borderRadius: 8.0,
         itemBorderRadius: 8.0,
@@ -185,7 +185,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   Icons.home_sharp,
                   color: currentIndex == 0
                       ? FlutterFlowTheme.of(context).primary
-                      : FlutterFlowTheme.of(context).secondaryText,
+                      : FlutterFlowTheme.of(context).primaryBackground,
                 ),
               ],
             ),
@@ -198,7 +198,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   FontAwesomeIcons.solidBell,
                   color: currentIndex == 1
                       ? FlutterFlowTheme.of(context).primary
-                      : FlutterFlowTheme.of(context).secondaryText,
+                      : FlutterFlowTheme.of(context).primaryBackground,
                 ),
               ],
             ),
@@ -213,7 +213,7 @@ class _NavBarPageState extends State<NavBarPage> {
                       : Icons.person_outline_rounded,
                   color: currentIndex == 2
                       ? FlutterFlowTheme.of(context).primary
-                      : FlutterFlowTheme.of(context).secondaryText,
+                      : FlutterFlowTheme.of(context).primaryBackground,
                   size: currentIndex == 2 ? 24.0 : 24.0,
                 ),
                 Text(
@@ -222,7 +222,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   style: TextStyle(
                     color: currentIndex == 2
                         ? FlutterFlowTheme.of(context).primary
-                        : FlutterFlowTheme.of(context).secondaryText,
+                        : FlutterFlowTheme.of(context).primaryBackground,
                     fontSize: 11.0,
                   ),
                 ),
