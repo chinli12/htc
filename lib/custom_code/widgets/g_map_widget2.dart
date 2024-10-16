@@ -122,40 +122,6 @@ class _GMapWidget2State extends State<GMapWidget2> {
                 ),
               ),
               // demonstrates how to interact with the controller
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          _mapsWidgetController.currentState!.setSourceLatLng(
-                            GM.LatLng(
-                              40.484000837597925 * (Random().nextDouble()),
-                              -3.369978368282318,
-                            ),
-                          );
-                        },
-                        child: Text('Update source'),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          final googleMapsCon = await _mapsWidgetController
-                              .currentState!
-                              .getGoogleMapsController();
-                          googleMapsCon.showMarkerInfoWindow(
-                            GM.MarkerIconInfo.sourceMarkerId,
-                          );
-                        },
-                        child: Text('Show source info'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),
