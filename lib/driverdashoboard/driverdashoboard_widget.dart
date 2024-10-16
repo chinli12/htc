@@ -193,7 +193,8 @@ class _DriverdashoboardWidgetState extends State<DriverdashoboardWidget> {
                                                   )
                                                   .where(
                                                     'status',
-                                                    isEqualTo: Status.pending
+                                                    isNotEqualTo: Status
+                                                        .completed
                                                         .serialize(),
                                                   ),
                                         ),
@@ -388,6 +389,8 @@ class _DriverdashoboardWidgetState extends State<DriverdashoboardWidget> {
                                                                           getCurrentTimestamp,
                                                                       type: Notifytype
                                                                           .acepted,
+                                                                      seen:
+                                                                          false,
                                                                     ));
                                                                 logFirebaseEvent(
                                                                     'Button_backend_call');
@@ -518,6 +521,7 @@ class _DriverdashoboardWidgetState extends State<DriverdashoboardWidget> {
                                                                         getCurrentTimestamp,
                                                                     type: Notifytype
                                                                         .completed,
+                                                                    seen: false,
                                                                   ));
                                                             }
                                                           },
@@ -739,7 +743,7 @@ class _DriverdashoboardWidgetState extends State<DriverdashoboardWidget> {
                                                         ),
                                                         if (listViewBookingRecord
                                                                 .driversPositions
-                                                                .length >
+                                                                .length >=
                                                             1)
                                                           FFButtonWidget(
                                                             onPressed:

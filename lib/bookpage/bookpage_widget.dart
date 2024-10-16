@@ -627,6 +627,7 @@ class _BookpageWidgetState extends State<BookpageWidget> {
                                                 '${currentUserDisplayName} Requested for a ride',
                                             time: getCurrentTimestamp,
                                             type: Notifytype.Requestdrive,
+                                            seen: false,
                                           ));
                                       logFirebaseEvent('Button_navigate_to');
 
