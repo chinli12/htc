@@ -319,7 +319,8 @@ class _SettingWidgetState extends State<SettingWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
-                                        color: Color(0x5114181B),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w500,

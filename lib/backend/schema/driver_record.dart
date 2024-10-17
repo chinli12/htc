@@ -197,6 +197,11 @@ class DriverRecord extends FirestoreRecord {
   List<double> get sumRating => _sumRating ?? const [];
   bool hasSumRating() => _sumRating != null;
 
+  // "oprationArea" field.
+  DestinationStruct? _oprationArea;
+  DestinationStruct get oprationArea => _oprationArea ?? DestinationStruct();
+  bool hasOprationArea() => _oprationArea != null;
+
   void _initializeFields() {
     _infor = snapshotData['infor'] as DocumentReference?;
     _location = snapshotData['location'] as LatLng?;
@@ -234,6 +239,8 @@ class DriverRecord extends FirestoreRecord {
     _active = snapshotData['active'] as bool?;
     _totalrating = castToType<int>(snapshotData['totalrating']);
     _sumRating = getDataList(snapshotData['sumRating']);
+    _oprationArea =
+        DestinationStruct.maybeFromMap(snapshotData['oprationArea']);
   }
 
   static CollectionReference get collection =>
@@ -305,6 +312,7 @@ Map<String, dynamic> createDriverRecordData({
   String? gender,
   bool? active,
   int? totalrating,
+  DestinationStruct? oprationArea,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -343,8 +351,12 @@ Map<String, dynamic> createDriverRecordData({
       'gender': gender,
       'active': active,
       'totalrating': totalrating,
+      'oprationArea': DestinationStruct().toMap(),
     }.withoutNulls,
   );
+
+  // Handle nested data for "oprationArea" field.
+  addDestinationStructData(firestoreData, oprationArea, 'oprationArea');
 
   return firestoreData;
 }
@@ -390,7 +402,8 @@ class DriverRecordDocumentEquality implements Equality<DriverRecord> {
         e1?.gender == e2?.gender &&
         e1?.active == e2?.active &&
         e1?.totalrating == e2?.totalrating &&
-        listEquality.equals(e1?.sumRating, e2?.sumRating);
+        listEquality.equals(e1?.sumRating, e2?.sumRating) &&
+        e1?.oprationArea == e2?.oprationArea;
   }
 
   @override
@@ -430,7 +443,8 @@ class DriverRecordDocumentEquality implements Equality<DriverRecord> {
         e?.gender,
         e?.active,
         e?.totalrating,
-        e?.sumRating
+        e?.sumRating,
+        e?.oprationArea
       ]);
 
   @override

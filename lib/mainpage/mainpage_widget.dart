@@ -434,7 +434,11 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        'Ride to ${listViewBookingRecord.destiAdress.adress}',
+                                                        'Ride to ${listViewBookingRecord.destiAdress.adress}'
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 45,
+                                                          replacement: '…',
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

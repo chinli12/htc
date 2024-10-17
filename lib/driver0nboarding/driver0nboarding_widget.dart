@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
@@ -1187,6 +1188,17 @@ class _Driver0nboardingWidgetState extends State<Driver0nboardingWidget> {
                           gender:
                               valueOrDefault(currentUserDocument?.gender, ''),
                           active: false,
+                          oprationArea: updateDestinationStruct(
+                            DestinationStruct(
+                              country: _model.placePickerValue.country,
+                              adress: _model.placePickerValue.address,
+                              city: _model.placePickerValue.city,
+                              state: _model.placePickerValue.state,
+                              zip: _model.placePickerValue.zipCode,
+                            ),
+                            clearUnsetFields: false,
+                            create: true,
+                          ),
                         ));
                         _model.driver = DriverRecord.getDocumentFromData(
                             createDriverRecordData(
@@ -1222,6 +1234,17 @@ class _Driver0nboardingWidgetState extends State<Driver0nboardingWidget> {
                               gender: valueOrDefault(
                                   currentUserDocument?.gender, ''),
                               active: false,
+                              oprationArea: updateDestinationStruct(
+                                DestinationStruct(
+                                  country: _model.placePickerValue.country,
+                                  adress: _model.placePickerValue.address,
+                                  city: _model.placePickerValue.city,
+                                  state: _model.placePickerValue.state,
+                                  zip: _model.placePickerValue.zipCode,
+                                ),
+                                clearUnsetFields: false,
+                                create: true,
+                              ),
                             ),
                             driverRecordReference);
                         logFirebaseEvent('Button_backend_call');

@@ -78,7 +78,7 @@ class _DriverprofileWidgetState extends State<DriverprofileWidget> {
             },
           ),
           actions: [],
-          centerTitle: true,
+          centerTitle: false,
           elevation: 2.0,
         ),
         body: SafeArea(
@@ -548,7 +548,7 @@ class _DriverprofileWidgetState extends State<DriverprofileWidget> {
                                                   ),
                                                 if ((widget!.driver?.wedStart !=
                                                         null) ||
-                                                    (widget!.driver?.wedEnd ==
+                                                    (widget!.driver?.wedEnd !=
                                                         null))
                                                   Icon(
                                                     Icons.access_time,
@@ -1081,6 +1081,110 @@ class _DriverprofileWidgetState extends State<DriverprofileWidget> {
                             ),
                           ),
                         ),
+                        Material(
+                          color: Colors.transparent,
+                          elevation: 2.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).secondarydark,
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 16.0, 16.0, 16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Operation Area',
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineSmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'City',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                      Text(
+                                        valueOrDefault<String>(
+                                          widget!.driver?.oprationArea?.city,
+                                          'ABC 123',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Neighorhood',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                      Text(
+                                        valueOrDefault<String>(
+                                          widget!.driver?.oprationArea?.adress,
+                                          'ABC 123',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ].divide(SizedBox(height: 16.0)),
+                              ),
+                            ),
+                          ),
+                        ),
                         if (widget!.admin)
                           InkWell(
                             splashColor: Colors.transparent,
@@ -1132,6 +1236,9 @@ class _DriverprofileWidgetState extends State<DriverprofileWidget> {
                                   .update(createDriverRecordData(
                                 active: true,
                               ));
+                              logFirebaseEvent('Button_navigate_to');
+
+                              context.pushNamed('managedriver');
                             } else {
                               logFirebaseEvent('Button_navigate_to');
 

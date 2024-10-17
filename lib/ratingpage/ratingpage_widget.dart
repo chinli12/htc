@@ -629,9 +629,6 @@ class _RatingpageWidgetState extends State<RatingpageWidget> {
                                     },
                                   ),
                                 });
-                                logFirebaseEvent('Button_update_page_state');
-
-                                safeSetState(() {});
                                 logFirebaseEvent('Button_backend_call');
 
                                 await widget!.driver!
@@ -640,6 +637,24 @@ class _RatingpageWidgetState extends State<RatingpageWidget> {
                                       ratingpageDriverRecord.sumRating
                                           .toList()),
                                 ));
+                                logFirebaseEvent('Button_navigate_to');
+
+                                context.pushNamed(
+                                  'Driverprofile',
+                                  queryParameters: {
+                                    'driver': serializeParam(
+                                      ratingpageDriverRecord,
+                                      ParamType.Document,
+                                    ),
+                                    'admin': serializeParam(
+                                      false,
+                                      ParamType.bool,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    'driver': ratingpageDriverRecord,
+                                  },
+                                );
                               } else {
                                 logFirebaseEvent('Button_alert_dialog');
                                 await showDialog(

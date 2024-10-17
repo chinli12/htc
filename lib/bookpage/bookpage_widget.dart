@@ -629,6 +629,12 @@ class _BookpageWidgetState extends State<BookpageWidget> {
                                             type: Notifytype.Requestdrive,
                                             seen: false,
                                           ));
+                                      logFirebaseEvent('Button_backend_call');
+
+                                      await widget!.driver!.reference
+                                          .update(createDriverRecordData(
+                                        available: false,
+                                      ));
                                       logFirebaseEvent('Button_navigate_to');
 
                                       context.pushNamed('driverdashoboard');
